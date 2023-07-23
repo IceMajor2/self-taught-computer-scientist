@@ -61,5 +61,6 @@ class LinearSearchTest {
 	/**
 	 * TODO: Write a method that will create a chart
 	 * for user to determine the time complexity.
+	 * Or compare the amount of steps!
 	 */
 }
