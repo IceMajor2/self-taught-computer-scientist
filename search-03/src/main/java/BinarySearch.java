@@ -10,16 +10,15 @@ public class BinarySearch {
 
 		T currElement = array[middle];
 		int result = comparator.compare(currElement, searchFor);
-
 		while (result != 0) {
 			if (result > 0) {
-				if (monotonicity == 1) right = middle - 1;
+				if (monotonicity >= 1) right = middle - 1;
 				else left = middle + 1;
 				if((left + right) / 2 == middle) return null;
 				middle = (left + right) / 2;
 			}
 			if (result < 0) {
-				if (monotonicity == 1) left = middle + 1;
+				if (monotonicity >= 1) left = middle + 1;
 				else right = middle - 1;
 				if((left + right) / 2 == middle) return null;
 				middle = (left + right) / 2;
