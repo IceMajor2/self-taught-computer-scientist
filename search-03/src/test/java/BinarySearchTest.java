@@ -67,13 +67,33 @@ class BinarySearchTest {
 
 	@Test
 	void findNumberNotInArrayTest() {
-		Integer[] numbers = new Integer[]{0, 0, 0, 1, 9, 19};
+		Integer[] numbers = new Integer[] { 0, 0, 0, 1, 9, 19 };
 
 		Integer result = BinarySearch.get(numbers, 25, Comparator.comparing(Integer::intValue));
 		assertNull(result);
 		result = BinarySearch.get(numbers, 15, Comparator.comparing(Integer::intValue));
 		assertNull(result);
 		result = BinarySearch.get(numbers, -1, Comparator.comparing(Integer::intValue));
+		assertNull(result);
+	}
+
+	@Test
+	void findStringTest() {
+		String[] strings = new String[] { "Ala", "Beta", "Hello", "Kot", "Krzysztof", "XYZ" };
+
+		for(int i = 0; i < strings.length; i++) {
+			String find = strings[i];
+			Integer result = BinarySearch.get(strings, find, Comparator.comparing(String::toString));
+			assertNotNull(result);
+			assertEquals(i, result);
+		}
+	}
+
+	@Test
+	void findStringNotInArrayTest() {
+		String[] strings = new String[] {"AAa", "BbB", "CcC"};
+		String find = "dDD";
+		Integer result = BinarySearch.get(strings, find, Comparator.comparing(String::toString));
 		assertNull(result);
 	}
 }
