@@ -1,3 +1,10 @@
+/**
+ * Class with linear search implementation.
+ * <p>
+ * Linear search is best used on a relatively
+ * small data sets that are unsorted.
+ * @author IceMajor
+ */
 public class LinearSearch {
 
 	/**
