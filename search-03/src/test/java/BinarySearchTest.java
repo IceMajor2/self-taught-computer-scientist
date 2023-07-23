@@ -96,4 +96,15 @@ class BinarySearchTest {
 		Integer result = BinarySearch.get(strings, find, Comparator.comparing(String::toString));
 		assertNull(result);
 	}
+
+	@Test
+	void findCharsTest() {
+		Character[] asciiChars = new Character[] {32, 57, 58, 65, 91, 123, 127};
+		for(int i = 0; i < asciiChars.length; i++) {
+			char find = asciiChars[i];
+			Integer result = BinarySearch.get(asciiChars, find, Comparator.comparing(Character::charValue));
+			assertNotNull(result);
+			assertEquals(i, result);
+		}
+	}
 }
