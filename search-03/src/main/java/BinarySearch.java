@@ -2,7 +2,7 @@ import java.util.Comparator;
 
 public class BinarySearch {
 
-	public static <T> int get(T[] array, T searchFor, Comparator<T> comparator) {
+	public static <T> Integer get(T[] array, T searchFor, Comparator<T> comparator) {
 		int monotonicity = determineMonotonicity(array, comparator);
 		int left = 0;
 		int right = array.length - 1;
@@ -15,11 +15,13 @@ public class BinarySearch {
 			if (result > 0) {
 				if (monotonicity == 1) right = middle - 1;
 				else left = middle + 1;
+				if((left + right) / 2 == middle) return null;
 				middle = (left + right) / 2;
 			}
 			if (result < 0) {
 				if (monotonicity == 1) left = middle + 1;
 				else right = middle - 1;
+				if((left + right) / 2 == middle) return null;
 				middle = (left + right) / 2;
 			}
 			currElement = array[middle];
