@@ -1,11 +1,8 @@
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
-
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class LinearSearchTest {
 
@@ -34,28 +31,12 @@ class LinearSearchTest {
 	}
 
 	@Test
-	void getFloatFromBigDataSetTest() {
-		Float[] floats = getBigFloatArray(10000000);
-		Float find = floats[floats.length - 1];
-		Float found = LinearSearch.get(floats, find);
+	void getIntegerFromBigDataSetTest() {
+		Integer[] ints = TestUtils.getUniqueRandomArray(10000000);
+		Integer find = ints[ints.length - 1];
+		Integer found = LinearSearch.get(ints, find);
 		assertNotNull(found);
 		assertEquals(find, found);
-	}
-
-	private Float[] getBigFloatArray(int size) {
-		Random random = new Random();
-		Set<Float> set = new HashSet<>();
-		Float[] floats = new Float[size];
-
-		int i = 0;
-		while(set.size() < size) {
-			float number = random.nextFloat(1000) - 500;
-			if(set.add(number)) {
-				floats[i] = number;
-				i++;
-			}
-		}
-		return floats;
 	}
 
 	/**
