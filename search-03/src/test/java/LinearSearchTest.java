@@ -32,7 +32,7 @@ class LinearSearchTest {
 
 	@Test
 	void getIntegerFromBigDataSetTest() {
-		Integer[] ints = TestUtils.getUniqueRandomArray(10000000);
+		Integer[] ints = TestUtils.getUniqueRandomArray(1000000);
 		Integer find = ints[ints.length - 1];
 		Integer found = LinearSearch.get(ints, find);
 		assertNotNull(found);
