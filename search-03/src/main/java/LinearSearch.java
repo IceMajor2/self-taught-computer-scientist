@@ -1,7 +1,7 @@
 /**
  * Class with linear search implementation.
  * <p>
- * Linear search is best used on a relatively
+ * Linear search is best used on a
  * small data sets that are unsorted.
  * @author IceMajor
  */
