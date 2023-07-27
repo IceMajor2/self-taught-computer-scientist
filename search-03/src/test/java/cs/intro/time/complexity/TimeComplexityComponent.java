@@ -1,4 +1,4 @@
-package cs.intro.complexity;
+package cs.intro.time.complexity;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

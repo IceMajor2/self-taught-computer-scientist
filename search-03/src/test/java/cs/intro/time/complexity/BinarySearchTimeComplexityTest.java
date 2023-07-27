@@ -1,4 +1,4 @@
-package cs.intro.complexity;
+package cs.intro.time.complexity;
 
 public class BinarySearchTimeComplexityTest {
 }
