@@ -1,68 +1,78 @@
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class BinarySearchTest {
 
-	@Test
-	void findNumberSmallArrayTest() {
-		Integer[] numbers = new Integer[] { 1, 5, 6, 10, 11, 19 };
-		for (int i = 0; i < numbers.length; i++) {
-			int find = numbers[i];
-			Integer result = BinarySearch.get(numbers, find, Comparator.comparing(Integer::intValue));
-			assertNotNull(result);
-			assertEquals(i, result);
-		}
+	@ParameterizedTest
+	@ValueSource(ints = { -15, -9, 11, 14 })
+	void findNumberSmallArrayAscendingTest(int toFind) {
+		Integer[] numbers = TestUtils.getNumbersFromTo(-15, 15);
+		Integer result = BinarySearch.get(numbers, toFind, Comparator.comparing(Integer::intValue));
+		assertNotNull(result);
+		assertEquals(toFind, numbers[result]);
 	}
 
-	@Test
-	void findNumberBigArrayTest() {
-//		Integer[] numbers = TestUtils.getUniqueRandomArray(1000000);
-//		Arrays.sort(numbers);
-//		for (int i = 0; i < numbers.length; i += 1) {
-//			int find = numbers[i];
-//			Integer result = BinarySearch.get(numbers, find, Comparator.comparing(Integer::intValue));
-//			assertNotNull(result);
-//			assertEquals(i, result);
-//		}
+	@ParameterizedTest
+	@ValueSource(ints = { -10, 9, 2, -5 })
+	void findNumberSmallArrayDescendingTest(int toFind) {
+		Integer[] numbers = TestUtils.getNumbersFromTo(-10, 10);
+		Integer result = BinarySearch.get(numbers, toFind, Comparator.comparing(Integer::intValue));
+		assertNotNull(result);
+		assertEquals(toFind, numbers[result]);
 	}
 
-	// TODO: Not sorted -> throw error
-
-	@Test
-	void findNumberSmallArrayDescendingTest() {
-		Integer[] numbers = new Integer[] { 2, 0, -1, -2, -3, -9, -27, -33 };
-		for (int i = 0; i < numbers.length; i++) {
-			int find = numbers[i];
-			Integer result = BinarySearch.get(numbers, find, Comparator.comparing(Integer::intValue));
-			assertNotNull(result);
-			assertEquals(i, result);
-		}
+	@ParameterizedTest
+	@ValueSource(ints = { -10000000, 9999999, 0, -584239, 28190, 127839 })
+	void findNumberBigArrayAscendingTest(int toFind) {
+		Integer[] numbers = TestUtils.getNumbersFromTo(-10000000, 10000000);
+		Integer result = BinarySearch.get(numbers, toFind, Comparator.comparing(Integer::intValue));
+		assertNotNull(result);
+		assertEquals(toFind, numbers[result]);
 	}
 
-	@Test
-	void findNumberBigArrayDescendingTest() {
-//		Integer[] numbers = TestUtils.getUniqueRandomArray(1000000);
-//		Arrays.sort(numbers, Comparator.reverseOrder());
-//		for (int i = 0; i < numbers.length; i += 1) {
-//			int find = numbers[i];
-//			Integer result = BinarySearch.get(numbers, find, Comparator.comparing(Integer::intValue));
-//			assertNotNull(result);
-//			assertEquals(i, result);
-//		}
+	@ParameterizedTest
+	@ValueSource(ints = { -10000000, 9999999, 0, -74329, 95230, 7652347 })
+	void findNumberBigArrayDescendingTest(int toFind) {
+		Integer[] numbers = TestUtils.getNumbersFromTo(-10000000, 10000000);
+		Collections.reverse(Arrays.asList(numbers));
+		Integer result = BinarySearch.get(numbers, toFind, Comparator.comparing(Integer::intValue));
+		assertNotNull(result);
+		assertEquals(toFind, numbers[result]);
 	}
 
-	@Test
-	void findNumberArrayNotDescendingTest() {
+	@ParameterizedTest
+	@ValueSource(ints = { 3, 12 })
+	void findNumberArrayNotDescendingTest(int toFind) {
 		Integer[] numbers = new Integer[] { 1, 2, 3, 3, 9, 10, 11, 12, 12 };
-		int expected1 = 2;
-		int expected2 = 3;
-		int result = BinarySearch.get(numbers, 3, Comparator.comparing(Integer::intValue));
-		assertTrue(result == expected1 || result == expected2, "Was searching for number '3'. "
-				+ "Expected is 2 or 3, but was: %d".formatted(result));
+		int result = BinarySearch.get(numbers, toFind, Comparator.comparing(Integer::intValue));
+		assertNotNull(result);
+		assertEquals(toFind, numbers[result]);
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = { 10, 0, -1 })
+	void findNumberArrayNotAscendingTest(int toFind) {
+		Integer[] numbers = new Integer[] { 15, 10, 10, 7, 0, 0, -1, -1, -1, -15 };
+		int result = BinarySearch.get(numbers, toFind, Comparator.comparing(Integer::intValue));
+		assertNotNull(result);
+		assertEquals(toFind, numbers[result]);
+	}
+
+	@Test
+	void findNumberArraySameObjectsTest() {
+		Integer[] numbers = new Integer[] { 9, 9, 9, 9 };
+		int result = BinarySearch.get(numbers, 9, Comparator.comparing(Integer::intValue));
+		assertNotNull(result);
+		assertEquals(9, numbers[result]);
 	}
 
 	@Test
@@ -77,21 +87,18 @@ class BinarySearchTest {
 		assertNull(result);
 	}
 
-	@Test
-	void findStringTest() {
-		String[] strings = new String[] { "Ala", "Beta", "Hello", "Kot", "Krzysztof", "XYZ" };
-
-		for(int i = 0; i < strings.length; i++) {
-			String find = strings[i];
-			Integer result = BinarySearch.get(strings, find, Comparator.comparing(String::toString));
-			assertNotNull(result);
-			assertEquals(i, result);
-		}
+	@ParameterizedTest
+	@ValueSource(strings = { "Faye", "Eddie", "Joey", "Alicia" })
+	void findStringTest(String toFind) {
+		String[] strings = TestUtils.getNames();
+		Integer result = BinarySearch.get(strings, toFind, Comparator.comparing(String::toString));
+		assertNotNull(result);
+		assertEquals(toFind, strings[result]);
 	}
 
 	@Test
 	void findStringNotInArrayTest() {
-		String[] strings = new String[] {"AAa", "BbB", "CcC"};
+		String[] strings = new String[] { "AAa", "BbB", "CcC" };
 		String find = "dDD";
 		Integer result = BinarySearch.get(strings, find, Comparator.comparing(String::toString));
 		assertNull(result);
@@ -99,8 +106,8 @@ class BinarySearchTest {
 
 	@Test
 	void findCharsTest() {
-		Character[] asciiChars = new Character[] {32, 57, 58, 65, 91, 123, 127};
-		for(int i = 0; i < asciiChars.length; i++) {
+		Character[] asciiChars = new Character[] { 32, 57, 58, 65, 91, 123, 127 };
+		for (int i = 0; i < asciiChars.length; i++) {
 			char find = asciiChars[i];
 			Integer result = BinarySearch.get(asciiChars, find, Comparator.comparing(Character::charValue));
 			assertNotNull(result);
