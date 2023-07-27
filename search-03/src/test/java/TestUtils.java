@@ -11,6 +11,21 @@ import java.util.Set;
 
 public class TestUtils {
 
+	/**
+	 * Method returns an {@code Integer} array from specified number
+	 * marked as {@code lowerBound} parameter (inclusively) to a
+	 * {@code upperBound} parameter (exclusively).
+	 */
+	public static Integer[] getNumbersFromTo(int lowerBound, int upperBound) {
+		int size = upperBound - lowerBound;
+
+		Integer[] nums = new Integer[size];
+		for (int i = 0, num = lowerBound; i < size; i++, num++) {
+			nums[i] = num;
+		}
+		return nums;
+	}
+
 	public static Integer[] getUniqueRandomArray(int size) {
 		Set<Integer> set = new HashSet<>();
 		Integer[] array = new Integer[size];
