@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,10 +24,20 @@ public class TestUtils {
 	}
 
 	/**
-	 * Method requires a file of {@code first-names.txt"} signature
-	 * under {@code resources} folder in {@code test} directory.
-	 * It also requires a number of a desired output sample size.
-	 * User receives a <i>shuffled</i> array of strings.
+	 * Method requires a file of {@code 'first-names.txt'} signature
+	 * located in {@code resources} folder under {@code test} directory
+	 * ({@code /src/test/resources}). It will try to fetch all the strings
+	 * specified in the file (if their number is less than
+	 * {@code Integer.MAX_VALUE}). If you want to limit it to a certain number,
+	 * refer to {@link #getNames(int)}
+	 */
+	public static String[] getNames() {
+		return getNames(Integer.MAX_VALUE);
+	}
+
+	/**
+	 * Same as {@link #getNames()} but providing it with a number
+	 * limits the returned array size.
 	 */
 	public static String[] getNames(int howMany) {
 		File namesTxt = new File(Paths.get("src\\test\\resources\\first-names.txt").toUri());
@@ -43,7 +52,6 @@ public class TestUtils {
 				index++;
 			}
 
-			Collections.shuffle(names);
 			String[] strarray = names.toArray(new String[0]);
 			return strarray;
 		}
