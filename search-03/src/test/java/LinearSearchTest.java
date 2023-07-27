@@ -40,19 +40,12 @@ class LinearSearchTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 0, 5821, 92100, 10, 299999, 111111 })
-	void findIntegersInBigDataSetTest(int index) {
-		Integer[] numbers = TestUtils.getNumbersFromTo(-250000, 50000);
-		Collections.shuffle(Arrays.asList(numbers));
-		Integer toFind = numbers[index];
+	@ValueSource(ints = { -10000000, 0, -93782, -320000, 9999999 })
+	void findIntegersInBigDataSetTest(int number) {
+		Integer[] numbers = TestUtils.getNumbersFromTo(-10000000, 10000000);
+		Integer toFind = number;
 		Integer found = LinearSearch.get(numbers, toFind);
 		assertNotNull(found);
 		assertEquals(toFind, found);
 	}
-
-	/**
-	 * TODO: Write a method that will create a chart
-	 * for user to determine the time complexity.
-	 * Or compare the amount of steps!
-	 */
 }
