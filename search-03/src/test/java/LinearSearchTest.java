@@ -14,6 +14,7 @@ class LinearSearchTest {
 	@ValueSource(ints = { 0, 10, 3, 19 })
 	void findStringTest(int index) {
 		String[] strings = TestUtils.getNames(20);
+		Collections.shuffle(Arrays.asList(strings));
 		String toFind = strings[index];
 		String found = LinearSearch.get(strings, toFind);
 		assertNotNull(found);
