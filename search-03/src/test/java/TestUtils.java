@@ -3,11 +3,8 @@ import java.io.FileNotFoundException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
-import java.util.Set;
 
 public class TestUtils {
 
@@ -27,23 +24,12 @@ public class TestUtils {
 		return nums;
 	}
 
-	public static Integer[] getUniqueRandomArray(int size) {
-		Set<Integer> set = new HashSet<>();
-		Integer[] array = new Integer[size];
-
-		Random random = new Random();
-		int i = 0;
-		while (set.size() != size) {
-			int range = Integer.MAX_VALUE;
-			int num = random.nextInt(range) - range / 2;
-			if (set.add(num)) {
-				array[i] = num;
-				i++;
-			}
-		}
-		return array;
-	}
-
+	/**
+	 * Method requires a file of {@code first-names.txt"} signature
+	 * under {@code resources} folder in {@code test} directory.
+	 * It also requires a number of a desired output sample size.
+	 * User receives a <i>shuffled</i> array of strings.
+	 */
 	public static String[] getNames(int howMany) {
 		File namesTxt = new File(Paths.get("src\\test\\resources\\first-names.txt").toUri());
 
