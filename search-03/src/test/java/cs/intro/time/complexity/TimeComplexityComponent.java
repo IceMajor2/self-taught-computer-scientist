@@ -2,15 +2,12 @@ package cs.intro.time.complexity;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 
-import cs.intro.LinearSearch;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -23,17 +20,17 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-import static cs.intro.TestUtils.*;
-
 public class TimeComplexityComponent extends JFrame {
 
-	public TimeComplexityComponent() {
+	private Map<Long, Long> data;
+
+	public TimeComplexityComponent(Map<Long, Long> data) {
+		this.data = data;
 		initUI();
 	}
 
 	private void initUI() {
-		Map<Long, Long> expResults = conductLinearSearchExperiment();
-		XYDataset dataset = createDataset(expResults);
+		XYDataset dataset = createDataset(data);
 		JFreeChart chart = createChart(dataset);
 
 		ChartPanel chartPanel = new ChartPanel(chart);
@@ -42,41 +39,9 @@ public class TimeComplexityComponent extends JFrame {
 		add(chartPanel);
 
 		pack();
-		setTitle("Time Complexity | Linear Search");
+		setTitle("Time Complexity");
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-
-	private Map<Long, Long> conductLinearSearchExperiment() {
-		Map<Long, Long> results = new LinkedHashMap<>();
-		Integer[] numbers = getNumbersFromTo(-87500, 87500);
-
-		System.out.println("Experiment is in progress. Please wait.");
-
-		int iterationsToDo = numbers.length - 10000;
-		double previousPercent = 0;
-		for (int i = 10000; i < numbers.length; i++) {
-			// logging logic
-			double percent = ((i - 10000) / (double) iterationsToDo) * 100;
-			if (percent - 10 >= previousPercent) {
-				System.out.println((int) percent + "%");
-				previousPercent = percent;
-			}
-
-			Integer toFind = numbers[i];
-			long start = System.nanoTime();
-			LinearSearch.get(numbers, toFind);
-			long end = System.nanoTime();
-			long timeElapsed = (end - start);
-			// do not register first 500 elements
-			// no idea why, but they tend to skew the results
-			if (i <= 10500) {
-				continue;
-			}
-			results.put(Long.valueOf(i), timeElapsed);
-		}
-		System.out.println("100%");
-		return results;
 	}
 
 	private XYDataset createDataset(Map<Long, Long> results) {
@@ -123,20 +88,12 @@ public class TimeComplexityComponent extends JFrame {
 
 		chart.getLegend().setFrame(BlockBorder.NONE);
 
-		chart.setTitle(new TextTitle("Time complexity of linear search confronted with an array of 175 000 elements",
+		chart.setTitle(new TextTitle("Time complexity of linear search confronted with an array of %d elements"
+						.formatted(this.data.size()),
 						new Font("Serif", java.awt.Font.BOLD, 16)
 				)
 		);
 
 		return chart;
-	}
-
-	public static void main(String[] args) {
-
-		EventQueue.invokeLater(() -> {
-
-			var ex = new TimeComplexityComponent();
-			ex.setVisible(true);
-		});
 	}
 }
