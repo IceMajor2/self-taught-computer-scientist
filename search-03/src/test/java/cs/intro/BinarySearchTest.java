@@ -1,10 +1,14 @@
+package cs.intro;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
+import cs.intro.BinarySearch;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import cs.intro.TestUtils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

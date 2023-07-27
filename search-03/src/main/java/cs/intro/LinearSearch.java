@@ -1,3 +1,5 @@
+package cs.intro;
+
 /**
  * Class with linear search implementation.
  * <p>

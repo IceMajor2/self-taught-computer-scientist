@@ -1,8 +1,12 @@
+package cs.intro;
+
 import java.util.Arrays;
 import java.util.Collections;
 
+import cs.intro.LinearSearch;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import cs.intro.TestUtils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

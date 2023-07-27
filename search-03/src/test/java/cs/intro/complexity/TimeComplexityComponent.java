@@ -1,3 +1,5 @@
+package cs.intro.complexity;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -8,6 +10,7 @@ import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 
+import cs.intro.LinearSearch;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -20,9 +23,11 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-public class LinearSearchTimeComplexityTest extends JFrame {
+import static cs.intro.TestUtils.*;
 
-	public LinearSearchTimeComplexityTest() {
+public class TimeComplexityComponent extends JFrame {
+
+	public TimeComplexityComponent() {
 		initUI();
 	}
 
@@ -44,7 +49,7 @@ public class LinearSearchTimeComplexityTest extends JFrame {
 
 	private Map<Long, Long> conductLinearSearchExperiment() {
 		Map<Long, Long> results = new LinkedHashMap<>();
-		Integer[] numbers = TestUtils.getNumbersFromTo(-87500, 87500);
+		Integer[] numbers = getNumbersFromTo(-87500, 87500);
 
 		System.out.println("Experiment is in progress. Please wait.");
 
@@ -130,36 +135,8 @@ public class LinearSearchTimeComplexityTest extends JFrame {
 
 		EventQueue.invokeLater(() -> {
 
-			var ex = new LinearSearchTimeComplexityTest();
+			var ex = new TimeComplexityComponent();
 			ex.setVisible(true);
 		});
 	}
-
-//	private DefaultCategoryDataset createDataset(Map<Long, Long> results) {
-//		String series1 = "";
-//
-//		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-//
-//		for (var entry : results.entrySet()) {
-//			Long index = entry.getKey();
-//			Long timeTaken = entry.getValue();
-//			dataset.addValue(timeTaken, series1, String.valueOf(index));
-//		}
-//
-//		return dataset;
-//	}
-//
-//
-//
-//	public static void main(String[] args) {
-//		SwingUtilities.invokeLater(() -> {
-//			LinearSearchTimeComplexityTest example =
-//					new LinearSearchTimeComplexityTest("Time Complexity");
-//			example.setAlwaysOnTop(true);
-//			example.pack();
-//			example.setSize(1280, 720);
-//			example.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//			example.setVisible(true);
-//		});
-//	}
 }
