@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -6,18 +8,19 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 class LinearSearchTest {
 
-	@Test
-	void findStringTest() {
-		String[] strings = new String[] { "Adrian", "Jakub", "Alicja", "Justyna", "Leonardo",
-				"Grzegorz", "Natalia", "Jerzy", "Jacek" };
-		String found = LinearSearch.get(strings, "Jacek");
+	@ParameterizedTest
+	@ValueSource(ints = {0, 10, 3, 19})
+	void findStringTest(int index) {
+		String[] strings = TestUtils.getNames(20);
+		String toFind = strings[index];
+		String found = LinearSearch.get(strings, toFind);
 		assertNotNull(found);
-		assertEquals("Jacek", found);
+		assertEquals(toFind, found);
 	}
 
 	@Test
 	void findIntegerTest() {
-		Integer[] numbers = new Integer[] {-1, -5, 2, 123, -9, 0, 8943, 321, 832, 59423, 12, 13};
+		Integer[] numbers = new Integer[] { -1, -5, 2, 123, -9, 0, 8943, 321, 832, 59423, 12, 13 };
 		Integer found = LinearSearch.get(numbers, -5);
 		assertNotNull(found);
 		assertEquals(-5, found);
@@ -25,7 +28,7 @@ class LinearSearchTest {
 
 	@Test
 	void findIntegerNotInArrayTest() {
-		Integer[] numbers = new Integer[] {-1, -5, 2, 123, -9, 0, 8943, 321, 832, 59423, 12, 13};
+		Integer[] numbers = new Integer[] { -1, -5, 2, 123, -9, 0, 8943, 321, 832, 59423, 12, 13 };
 		Integer found = LinearSearch.get(numbers, -3);
 		assertNull(found);
 	}
@@ -33,7 +36,7 @@ class LinearSearchTest {
 	@Test
 	void findIntegersInBigDataSetTest() {
 		Integer[] ints = TestUtils.getUniqueRandomArray(100000);
-		for(int i = 0; i < ints.length; i += 1) {
+		for (int i = 0; i < ints.length; i += 1) {
 			Integer find = ints[ints.length - 1];
 			Integer found = LinearSearch.get(ints, find);
 			assertNotNull(found);
