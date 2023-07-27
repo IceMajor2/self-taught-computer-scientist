@@ -15,6 +15,7 @@ public class TestUtils {
 	 * Method returns an {@code Integer} array from specified number
 	 * marked as {@code lowerBound} parameter (inclusively) to a
 	 * {@code upperBound} parameter (exclusively).
+	 * Numbers are returned in ascending order.
 	 */
 	public static Integer[] getNumbersFromTo(int lowerBound, int upperBound) {
 		int size = upperBound - lowerBound;
