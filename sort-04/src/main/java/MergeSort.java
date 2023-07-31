@@ -1,5 +1,9 @@
 public class MergeSort {
 
+	/**
+	 * Given array of {@code Integers} is going to be
+	 * sorted in ascending order using merge sort algorithm.
+	 */
 	public static Integer[] sort(Integer[] input) {
 		if (input.length > 1) {
 			int midIndex = input.length / 2;
