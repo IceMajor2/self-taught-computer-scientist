@@ -1,12 +1,4 @@
-import java.util.Arrays;
-
 public class MergeSort {
-
-	public static void main(String[] args) {
-		Integer[] array = new Integer[] { 7, 1, 9, 8 };
-		Integer[] sorted = sort(array);
-		System.out.println(Arrays.toString(sorted));
-	}
 
 	public static Integer[] sort(Integer[] input) {
 		if (input.length > 1) {
