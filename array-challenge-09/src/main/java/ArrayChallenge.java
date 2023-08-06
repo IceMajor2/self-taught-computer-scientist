@@ -8,6 +8,8 @@ public class ArrayChallenge {
 	 * First, there are all the even numbers of the original array.
 	 * The rest of the numbers are the uneven ones.
 	 * They're ordered based on their original occurrence in base array.
+	 * <p>
+	 * <b>NOTE:</b> the array must contain only non-negative values.
 	 */
 	public static int[] sort(int[] array) {
 		if(!isArrayValid(array)) {
