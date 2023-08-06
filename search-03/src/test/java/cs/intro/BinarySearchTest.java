@@ -4,11 +4,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
-import cs.intro.BinarySearch;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import cs.intro.TestUtils;
+import utils.TestUtils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -94,7 +93,7 @@ class BinarySearchTest {
 	@ParameterizedTest
 	@ValueSource(strings = { "Faye", "Eddie", "Joey", "Alicia" })
 	void findStringTest(String toFind) {
-		String[] strings = TestUtils.getNames();
+		String[] strings = FileUtils.getNames();
 		Integer result = BinarySearch.get(strings, toFind, Comparator.comparing(String::toString));
 		assertNotNull(result);
 		assertEquals(toFind, strings[result]);

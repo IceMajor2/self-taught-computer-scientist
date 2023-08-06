@@ -7,7 +7,7 @@ import java.util.Map;
 
 import cs.intro.BinarySearch;
 
-import static cs.intro.TestUtils.getNumbersFromTo;
+import utils.TestUtils;
 
 public class BinarySearchTimeComplexityTest {
 
@@ -21,7 +21,7 @@ public class BinarySearchTimeComplexityTest {
 
 	public static Map<Long, Long> conductExperiment() {
 		Map<Long, Long> results = new LinkedHashMap<>();
-		Integer[] numbers = getNumbersFromTo(-50000000, 50000000);
+		Integer[] numbers = TestUtils.getNumbersFromTo(-50000000, 50000000);
 
 		System.out.println("Experiment is in progress. Please wait.");
 

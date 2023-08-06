@@ -1,9 +1,9 @@
 import java.util.Arrays;
-import java.util.Random;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import utils.TestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,8 +16,8 @@ class MergeSortTest {
 			"[-15;-100;5239;91;-20;1;2],[-100;-20;-15;1;2;91;5239]"
 	})
 	void shouldReturnSortedArrayTest(Object array, Object expected) {
-		Integer[] input = parseCsvSourceToIntArray(array.toString());
-		Integer[] expectedArr = parseCsvSourceToIntArray(expected.toString());
+		Integer[] input = TestUtils.parseCsvSourceToIntArray(array.toString());
+		Integer[] expectedArr = TestUtils.parseCsvSourceToIntArray(expected.toString());
 		Integer[] actualSorted = MergeSort.sort(input);
 		assertThat(actualSorted)
 				.withFailMessage("The actual array was null")
@@ -30,7 +30,7 @@ class MergeSortTest {
 	@ParameterizedTest
 	@ValueSource(ints = { 500000, 1000000, 2000000, 5000000 })
 	void thisMergeSortIsFasterThanJavaArraySortTest(int size) {
-		Integer[] array = getBigArray(size);
+		Integer[] array = TestUtils.getBigArray(size);
 		Integer[] arrayCopy = array.clone();
 		long start = System.currentTimeMillis();
 		Arrays.sort(array);
@@ -51,9 +51,7 @@ class MergeSortTest {
 	@ParameterizedTest
 	@ValueSource(ints = { 10000, 200000, 300000 })
 	void shouldSortBigDataArrayTest(int size) {
-
-		Integer[] input = getBigArray(size);
-
+		Integer[] input = TestUtils.getBigArray(size);
 		Integer[] actualSorted = MergeSort.sort(input);
 
 		assertThat(actualSorted)
@@ -65,27 +63,5 @@ class MergeSortTest {
 		assertThat(actualSorted)
 				.withFailMessage("The actual array was not sorted correctly.")
 				.containsExactly(input);
-	}
-
-	private Integer[] getBigArray(int size) {
-		Integer[] ints = new Integer[size];
-		for (int i = 0; i < ints.length; i++) {
-			Random random = new Random();
-			Integer randNum = random.nextInt(8232658) - 523980;
-			ints[i] = randNum;
-		}
-		return ints;
-	}
-
-	private Integer[] parseCsvSourceToIntArray(String csvSource) {
-		csvSource = csvSource.replace("[", "").replace("]", "");
-		String[] strNums = csvSource.split(";");
-		Integer[] intArray = new Integer[strNums.length];
-		int index = 0;
-		for (String strNum : strNums) {
-			intArray[index] = Integer.valueOf(strNum);
-			index++;
-		}
-		return intArray;
 	}
 }

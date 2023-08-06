@@ -3,10 +3,9 @@ package cs.intro;
 import java.util.Arrays;
 import java.util.Collections;
 
-import cs.intro.LinearSearch;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import cs.intro.TestUtils;
+import utils.TestUtils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -17,7 +16,7 @@ class LinearSearchTest {
 	@ParameterizedTest
 	@ValueSource(ints = { 0, 10, 3, 19 })
 	void findStringTest(int index) {
-		String[] strings = TestUtils.getNames(20);
+		String[] strings = FileUtils.getNames(20);
 		Collections.shuffle(Arrays.asList(strings));
 		String toFind = strings[index];
 		String found = LinearSearch.get(strings, toFind);

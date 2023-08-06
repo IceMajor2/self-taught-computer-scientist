@@ -7,23 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class TestUtils {
-
-	/**
-	 * Method returns an {@code Integer} array from specified number
-	 * marked as {@code lowerBound} parameter (inclusively) to a
-	 * {@code upperBound} parameter (exclusively).
-	 * Numbers are returned in ascending order.
-	 */
-	public static Integer[] getNumbersFromTo(int lowerBound, int upperBound) {
-		int size = upperBound - lowerBound;
-
-		Integer[] nums = new Integer[size];
-		for (int i = 0, num = lowerBound; i < size; i++, num++) {
-			nums[i] = num;
-		}
-		return nums;
-	}
+public class FileUtils {
 
 	/**
 	 * Method requires a file of {@code 'first-names.txt'} signature

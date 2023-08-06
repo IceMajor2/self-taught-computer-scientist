@@ -5,8 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import cs.intro.LinearSearch;
-
-import static cs.intro.TestUtils.getNumbersFromTo;
+import utils.TestUtils;
 
 public class LinearSearchTimeComplexityTest {
 
@@ -20,7 +19,7 @@ public class LinearSearchTimeComplexityTest {
 
 	public static Map<Long, Long> conductExperiment() {
 		Map<Long, Long> results = new LinkedHashMap<>();
-		Integer[] numbers = getNumbersFromTo(-87500, 87500);
+		Integer[] numbers = TestUtils.getNumbersFromTo(-87500, 87500);
 
 		System.out.println("Experiment is in progress. Please wait.");
 
