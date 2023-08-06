@@ -13,6 +13,8 @@
 		<module>search-03</module>
 		<module>sort-04</module>
 		<module>primes-06</module>
+		<module>array-challenge-09</module>
+		<module>utils</module>
 	</modules>
 
 	<properties>
