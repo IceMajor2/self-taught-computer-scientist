@@ -10,6 +10,9 @@ public class ArrayChallenge {
 	 * They're ordered based on their original occurrence in base array.
 	 */
 	public static int[] sort(int[] array) {
+		if(!isArrayValid(array)) {
+			throw new IllegalArgumentException("Found negative number");
+		}
 		int[] sorted = new int[array.length];
 		int right = array.length - 1;
 		int left = 0;
@@ -25,6 +28,15 @@ public class ArrayChallenge {
 		}
 		partReverse(sorted, right + 1, array.length - 1);
 		return sorted;
+	}
+
+	private static boolean isArrayValid(int[] array) {
+		for(int num : array) {
+			if(num < 0) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	private static boolean isEven(int number) {
