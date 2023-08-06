@@ -1,4 +1,5 @@
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import utils.TestUtils;
@@ -19,5 +20,25 @@ class ArrayChallengeTest {
 		int[] expected = TestUtils.parseCsvSourceToIntArray(expectedStr);
 		int[] actual = ArrayChallenge.sort(input);
 		assertThat(actual).containsExactly(expected);
+	}
+
+	@ParameterizedTest
+	@CsvSource(value = {
+			"[1;0],[0;1]",
+			"[2],[2]",
+			"[0;1],[0;1]",
+			"[9],[9]"
+	})
+	void sortSmallArrayTest(String inputStr, String expectedStr) {
+		int[] input = TestUtils.parseCsvSourceToIntArray(inputStr);
+		int[] expected = TestUtils.parseCsvSourceToIntArray(expectedStr);
+		int[] actual = ArrayChallenge.sort(input);
+		assertThat(actual).containsExactly(expected);
+	}
+
+	@Test
+	void sortArrayWithNegativeValuesTest() {
+		assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> ArrayChallenge.sort(new int[]{-5, 0, 198, 1298, 432, 2}));
 	}
 }
