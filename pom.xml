@@ -12,6 +12,7 @@
 		<module>recursion-02</module>
 		<module>search-03</module>
 		<module>sort-04</module>
+		<module>primes-06</module>
 	</modules>
 
 	<properties>
