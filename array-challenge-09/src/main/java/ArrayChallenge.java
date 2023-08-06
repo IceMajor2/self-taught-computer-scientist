@@ -3,6 +3,12 @@
  */
 public class ArrayChallenge {
 
+	/**
+	 * Result is an array that is sorted in a specific way.
+	 * First, there are all the even numbers of the original array.
+	 * The rest of the numbers are the uneven ones.
+	 * They're ordered based on their original occurrence in base array.
+	 */
 	public static int[] sort(int[] array) {
 		int[] sorted = new int[array.length];
 		int right = array.length - 1;
