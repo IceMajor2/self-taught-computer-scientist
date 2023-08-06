@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -21,9 +23,10 @@ class SieveOfAtkinTest {
 	}
 
 	// edge cases: n is less than 0; n = 0, n = 1, n = 2
-	@Test
-	void findPrimes_whenNis0Test() {
+	@ParameterizedTest
+	@ValueSource(ints = {-12, 0})
+	void findPrimes_whenNis0Test(int n) {
 		assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> SieveOfAtkin.findPrimes(0));
+				.isThrownBy(() -> SieveOfAtkin.findPrimes(n));
 	}
 }
