@@ -16,8 +16,8 @@ class MergeSortTest {
 			"[-15;-100;5239;91;-20;1;2],[-100;-20;-15;1;2;91;5239]"
 	})
 	void shouldReturnSortedArrayTest(Object array, Object expected) {
-		Integer[] input = TestUtils.parseCsvSourceToIntArray(array.toString());
-		Integer[] expectedArr = TestUtils.parseCsvSourceToIntArray(expected.toString());
+		Integer[] input = TestUtils.parseCsvSourceToIntegerArray(array.toString());
+		Integer[] expectedArr = TestUtils.parseCsvSourceToIntegerArray(expected.toString());
 		Integer[] actualSorted = MergeSort.sort(input);
 		assertThat(actualSorted)
 				.withFailMessage("The actual array was null")

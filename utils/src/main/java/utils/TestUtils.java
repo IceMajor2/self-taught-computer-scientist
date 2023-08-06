@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class TestUtils {
@@ -45,7 +46,7 @@ public class TestUtils {
 	 * -@CsvSource("[3, 9, 8, 2, 0]") will be parsed into an int array
 	 * {@code {3, 9, 8, 2, 0}}.
 	 */
-	public static Integer[] parseCsvSourceToIntArray(String csvSource) {
+	public static Integer[] parseCsvSourceToIntegerArray(String csvSource) {
 		csvSource = csvSource.replace("[", "").replace("]", "");
 		String[] strNums = csvSource.split(";");
 		Integer[] intArray = new Integer[strNums.length];
@@ -55,5 +56,10 @@ public class TestUtils {
 			index++;
 		}
 		return intArray;
+	}
+
+	public static int[] parseCsvSourceToIntArray(String csvSource) {
+		Integer[] integers = parseCsvSourceToIntegerArray(csvSource);
+		return Arrays.stream(integers).mapToInt(i -> i).toArray();
 	}
 }
