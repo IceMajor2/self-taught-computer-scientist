@@ -1,7 +1,7 @@
 public class SieveOfAtkin {
 
 	public static int[] findPrimes(int n) {
-		if(n == 0) {
+		if(n <= 0) {
 			throw new IllegalArgumentException("The parameter must be a positive number");
 		}
 		boolean[] markedPrimes = calculatePrimes(n);
