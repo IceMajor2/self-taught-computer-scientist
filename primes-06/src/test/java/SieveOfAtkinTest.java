@@ -19,19 +19,32 @@ class SieveOfAtkinTest {
 	private static final int[] PRIMES_7 = new int[] { 2, 3, 5, 7 };
 
 	@Test
-		// TODO: split assertions into other test cases
 	void findPrimesTest() {
 		int[] expected = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47,
 				53, 59, 61, 67, 71, 73, 79, 83, 89, 97 };
 		int[] actual = SieveOfAtkin.findPrimes(100);
 
 		assertThat(actual)
-				.withFailMessage("Output was null")
-				.isNotNull()
-				.withFailMessage("Output is not sorted in ascending order")
-				.isSorted()
 				.withFailMessage("Output does not match expected numbers")
 				.containsExactly(expected);
+	}
+
+	@Test
+	void findPrimesDoesNotReturnNullOrEmptyArrayTest() {
+		int[] actual = SieveOfAtkin.findPrimes(11);
+		assertThat(actual)
+				.withFailMessage("Output was null")
+				.isNotNull()
+				.withFailMessage("Output was empty while there should be primes found")
+				.isNotEmpty();
+	}
+
+	@Test
+	void findPrimesIsSortedTest() {
+		int[] actual = SieveOfAtkin.findPrimes(50000);
+		assertThat(actual)
+				.withFailMessage("Output is not sorted in ascending order")
+				.isSorted();
 	}
 
 	@ParameterizedTest
