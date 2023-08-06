@@ -41,4 +41,12 @@ class ArrayChallengeTest {
 		assertThatExceptionOfType(IllegalArgumentException.class)
 				.isThrownBy(() -> ArrayChallenge.sort(new int[]{-5, 0, 198, 1298, 432, 2}));
 	}
+
+	@Test
+	void sortArrayWithEmptyArrayTest() {
+		int[] input = {};
+		int[] expected = {};
+		int[] actual = ArrayChallenge.sort(input);
+		assertThat(actual).containsExactly(expected);
+	}
 }
