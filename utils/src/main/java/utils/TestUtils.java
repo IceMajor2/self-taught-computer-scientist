@@ -43,8 +43,10 @@ public class TestUtils {
 	 * array.
 	 * <p>
 	 * Example:
-	 * -@CsvSource("[3, 9, 8, 2, 0]") will be parsed into an int array
+	 * -@CsvSource("[3;9;8;2;0]") will be parsed into an int array.
 	 * {@code {3, 9, 8, 2, 0}}.
+	 * <p>
+	 * <b>Note</b> the ';' as delimiter inside the array. It's required.
 	 */
 	public static Integer[] parseCsvSourceToIntegerArray(String csvSource) {
 		csvSource = csvSource.replace("[", "").replace("]", "");
