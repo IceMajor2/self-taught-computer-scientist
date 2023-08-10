@@ -15,6 +15,7 @@
 		<module>primes-06</module>
 		<module>array-challenge-09</module>
 		<module>utils</module>
+		<module>linkedlist-10</module>
 	</modules>
 
 	<properties>
