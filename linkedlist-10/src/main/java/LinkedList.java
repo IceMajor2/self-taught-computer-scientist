@@ -1,8 +1,9 @@
 import java.util.Collection;
-import java.util.Deque;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
 
-public class LinkedList<T> implements Deque<T>, Iterable<T> {
+public class LinkedList<T> implements MyCollection<T>, Iterable<T> {
 
 	private Node<T> sentinel;
 
@@ -16,63 +17,19 @@ public class LinkedList<T> implements Deque<T>, Iterable<T> {
 	}
 
 	@Override
-	public void addFirst(T t) {
+	public void add(T object) {
 		size++;
-		sentinel.next = new Node<>(sentinel, t, sentinel.next);
+		sentinel.prev = new Node<>(sentinel.prev, object, sentinel);
+		sentinel.prev.prev.next = sentinel.prev;
+	}
+
+	public void addFirst(T object) {
+		size++;
+		sentinel.next = new Node<>(sentinel, object, sentinel.next);
 		sentinel.next.next.prev = sentinel.next;
 	}
 
 	@Override
-	public void addLast(T t) {
-		size++;
-		sentinel.prev = new Node<>(sentinel.prev, t, sentinel);
-		sentinel.prev.prev.next = sentinel.prev;
-	}
-
-	@Override
-	public boolean offerFirst(T t) {
-		addFirst(t);
-		return true;
-	}
-
-	@Override
-	public boolean offerLast(T t) {
-		addLast(t);
-		return true;
-	}
-
-	@Override
-	public T removeFirst() {
-		if (size == 0) throw new IllegalStateException("List is empty!");
-		return pollFirst();
-	}
-
-	@Override
-	public T removeLast() {
-		if (size == 0) throw new IllegalStateException("List is empty!");
-		return pollLast();
-	}
-
-	@Override
-	public T pollFirst() {
-		if (size == 0) return null;
-		T toReturn = sentinel.next.data;
-		sentinel.next = sentinel.next.next;
-		sentinel.next.prev = sentinel;
-		size--;
-		return toReturn;
-	}
-
-	@Override
-	public T pollLast() {
-		if (size == 0) return null;
-		T toReturn = sentinel.prev.data;
-		sentinel.prev = sentinel.prev.prev;
-		sentinel.prev.next = sentinel;
-		size--;
-		return toReturn;
-	}
-
 	public T get(int index) {
 		if (index < 0 || index >= size) throw new IllegalArgumentException();
 		Node<T> current = sentinel.next;
@@ -84,79 +41,29 @@ public class LinkedList<T> implements Deque<T>, Iterable<T> {
 		return current.data;
 	}
 
-	@Override
 	public T getFirst() {
-		if (size == 0) throw new IllegalStateException("List is empty!");
-		return peekFirst();
-	}
-
-	@Override
-	public T getLast() {
-		if (size == 0) throw new IllegalStateException("List is empty!");
-		return peekLast();
-	}
-
-	@Override
-	public T peekFirst() {
+		throwExceptionIfListEmpty();
 		return sentinel.next.data;
 	}
 
-	@Override
-	public T peekLast() {
+	public T getLast() {
+		throwExceptionIfListEmpty();
 		return sentinel.prev.data;
 	}
 
 	@Override
-	public boolean removeFirstOccurrence(Object o) {
-		if (size == 0) throw new IllegalStateException();
-
-		Node<T> current = sentinel.next;
-		int index = 0;
-		while (index < size) {
-			if (current.equals(o)) {
-				Node<T> previous = current.prev;
-				Node<T> next = current.next;
-				next.prev = previous;
-				previous.next = next;
-				size--;
-				return true;
-			}
-			current = current.next;
-			index++;
+	public boolean contains(Object object) {
+		for(T element : this) {
+			if(Objects.equals(element, object)) return true;
 		}
 		return false;
 	}
 
 	@Override
-	public boolean removeLastOccurrence(Object o) {
-		if (size == 0) throw new IllegalStateException();
-
-		Node<T> current = sentinel.prev;
-		int index = 0;
-		while (index < size) {
-			if (current.equals(o)) {
-				Node<T> previous = current.prev;
-				Node<T> next = current.next;
-				next.prev = previous;
-				previous.next = next;
-				size--;
-				return true;
-			}
-			current = current.prev;
-			index++;
+	public boolean containsAll(Collection<?> collection) {
+		for(var object : collection) {
+			if(!this.contains(object)) return false;
 		}
-		return false;
-	}
-
-	@Override
-	public boolean add(T t) {
-		addLast(t);
-		return true;
-	}
-
-	@Override
-	public boolean offer(T t) {
-		offerLast(t);
 		return true;
 	}
 
@@ -165,51 +72,44 @@ public class LinkedList<T> implements Deque<T>, Iterable<T> {
 		return removeLast();
 	}
 
-	@Override
-	public T poll() {
-		return pollFirst();
+	public T removeFirst() {
+		throwExceptionIfListEmpty();
+		T toReturn = sentinel.next.data;
+		sentinel.next = sentinel.next.next;
+		sentinel.next.prev = sentinel;
+		size--;
+		return toReturn;
+	}
+
+	public T removeLast() {
+		throwExceptionIfListEmpty();
+		T toReturn = sentinel.prev.data;
+		sentinel.prev = sentinel.prev.prev;
+		sentinel.prev.next = sentinel;
+		size--;
+		return toReturn;
+	}
+
+	private T remove(Node<T> current) {
+		T toReturn = current.data;
+		Node<T> previous = current.prev;
+		Node<T> next = current.next;
+		previous.next = next;
+		next.prev = previous;
+		size--;
+		return toReturn;
 	}
 
 	@Override
-	public T element() {
-		return pollFirst();
-	}
-
-	@Override
-	public T peek() {
-		return peekFirst();
-	}
-
-	@Override
-	public boolean addAll(Collection<? extends T> c) {
-		for (var el : c) {
-			addLast(el);
-		}
-		return true;
-	}
-
-	@Override
-	public void push(T t) {
-		offerLast(t);
-	}
-
-	@Override
-	public T pop() {
-		return pollLast();
-	}
-
-	@Override
-	public boolean remove(Object o) {
-		pollLast();
-		return true;
-	}
-
-	@Override
-	public boolean contains(Object o) {
-		for (T object : this) {
-			if (o.equals(object)) {
+	public boolean remove(Object object) {
+		throwExceptionIfListEmpty();
+		Node<T> current = sentinel.next;
+		for(T element : this) {
+			if(Objects.equals(element, object)) {
+				this.remove(current);
 				return true;
 			}
+			current = current.next;
 		}
 		return false;
 	}
@@ -220,55 +120,24 @@ public class LinkedList<T> implements Deque<T>, Iterable<T> {
 	}
 
 	@Override
-	public Iterator<T> iterator() {
-		// TODO: implement
-		return new LinkedListIterator<>();
-	}
-
-	@Override
-	public Iterator<T> descendingIterator() {
-		// TODO: implement
-		return null;
-	}
-
-	@Override
 	public boolean isEmpty() {
-		return size == 0;
-	}
-
-	@Override
-	public Object[] toArray() {
-		// TODO: implement
-		return new Object[0];
-	}
-
-	@Override
-	public <T1> T1[] toArray(T1[] a) {
-		// TODO: implement
-		return null;
-	}
-
-	@Override
-	public boolean containsAll(Collection<?> c) {
-		// TODO: implement
-		return false;
-	}
-
-	@Override
-	public boolean removeAll(Collection<?> c) {
-		// TODO: implement
-		return false;
-	}
-
-	@Override
-	public boolean retainAll(Collection<?> c) {
-		// TODO: implement
-		return false;
+		return this.size == 0;
 	}
 
 	@Override
 	public void clear() {
-		// TODO: implement
+		// TODO
+	}
+
+	@Override
+	public List<T> toList() {
+		// TODO
+		return null;
+	}
+
+	@Override
+	public Iterator<T> iterator() {
+		return new LinkedListIterator<>();
 	}
 
 	@Override
@@ -299,6 +168,10 @@ public class LinkedList<T> implements Deque<T>, Iterable<T> {
 			sb.append(x).append(", ");
 		}
 		return sb.delete(sb.length() - 2, sb.length()).append("]").toString();
+	}
+
+	private void throwExceptionIfListEmpty() {
+		if (size == 0) throw new IllegalStateException("List is empty");
 	}
 
 	private class Node<T> {
