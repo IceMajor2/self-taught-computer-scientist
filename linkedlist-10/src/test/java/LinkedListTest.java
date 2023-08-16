@@ -1,5 +1,7 @@
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,12 +29,25 @@ class LinkedListTest {
 	}
 
 	@Test
+	void addFirstTest() {
+		// when
+		for(int num : testNumbers) emptyLinkedList.addFirst(num);
+		// then
+		List<Integer> expected = convertIntArrayToList(testNumbers);
+		Collections.reverse(expected);
+
+		assertThat(emptyLinkedList.size()).isEqualTo(testNumbers.length);
+		assertThat(emptyLinkedList.toList())
+				.containsExactlyElementsOf(expected);
+	}
+
+	@Test
 	void toListTest() {
 		assertThat(linkedListWithNumbers.toList())
 				.containsExactlyElementsOf(convertIntArrayToList(testNumbers));
 	}
 
 	private List<Integer> convertIntArrayToList(int[] intArray) {
-		return Arrays.stream(intArray).boxed().toList();
+		return Arrays.stream(intArray).boxed().collect(Collectors.toList());
 	}
 }
