@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -131,8 +132,9 @@ public class LinkedList<T> implements MyCollection<T>, Iterable<T> {
 
 	@Override
 	public List<T> toList() {
-		// TODO
-		return null;
+		List<T> javaList = new ArrayList<>();
+		for(T element : this) javaList.add(element);
+		return javaList;
 	}
 
 	@Override
