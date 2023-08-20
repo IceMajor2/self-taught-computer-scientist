@@ -1,13 +1,21 @@
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Deque;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import utils.TestUtils;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -131,6 +139,67 @@ class LinkedListTest {
 		assertThat(linkedListWithNumbers.contains(-5l)).isFalse();
 		assertThat(linkedListWithNumbers.contains(120f)).isFalse();
 		assertThat(linkedListWithNumbers.contains(-1.1)).isFalse();
+	}
+
+	@Test
+	void containsAllWhenListEmptyTest() {
+		assertThat(emptyLinkedList.containsAll(Set.of(5, 10, 15))).isFalse();
+	}
+
+	@ParameterizedTest
+	@CsvSource({
+			"[10;0;-29;55;-1]",
+			"[111;19;9230;-194;491;333]",
+			"[201;21;-24;101;94]"
+	})
+	void containsAllWhenOnlyPartOfElementsAreFoundTest(String s) {
+		Integer[] array = TestUtils.parseCsvSourceToIntegerArray(s);
+		List<Integer> list = Arrays.asList(array);
+		Deque<Integer> deque = new ArrayDeque(list);
+		Set<Integer> set = new HashSet(list);
+
+		assertThat(linkedListWithNumbers.containsAll(list)).isFalse();
+		assertThat(linkedListWithNumbers.containsAll(deque)).isFalse();
+		assertThat(linkedListWithNumbers.containsAll(set)).isFalse();
+	}
+
+	@ParameterizedTest
+	@CsvSource({
+			"[10;222;-1]",
+			"[120;9230;-24]",
+			"[19;21;222]"
+	})
+	void containsAllWhenElementsInListButDoubleTypeTest(String s) {
+		Integer[] array = TestUtils.parseCsvSourceToIntegerArray(s);
+		List<Double> list = Arrays.stream(array)
+				.flatMapToDouble(DoubleStream::of)
+				.boxed()
+				.toList();
+		Set<Double> set = new HashSet<>(list);
+		Deque<Integer> deque = new ArrayDeque(list);
+
+		assertThat(linkedListWithNumbers.containsAll(list)).isFalse();
+		assertThat(linkedListWithNumbers.containsAll(deque)).isFalse();
+		assertThat(linkedListWithNumbers.containsAll(set)).isFalse();
+	}
+
+	@ParameterizedTest
+	@CsvSource({
+			"[-5;19;-1]",
+			"[-1]",
+			"[120;9230;102;-24;-194;19;0]",
+			"[10;-5;0;19;21;-24;222;-194;-1;120;9230;102]",
+			"[19;-24;-1;10;222;21;102;9230;120;-194;0;-5]"
+	})
+	void containsAllWhenElementsInListTest(String s) {
+		Integer[] array = TestUtils.parseCsvSourceToIntegerArray(s);
+		List<Integer> list = Arrays.asList(array);
+		Deque<Integer> deque = new ArrayDeque(list);
+		Set<Integer> set = new HashSet(list);
+
+		assertThat(linkedListWithNumbers.containsAll(list)).isTrue();
+		assertThat(linkedListWithNumbers.containsAll(deque)).isTrue();
+		assertThat(linkedListWithNumbers.containsAll(set)).isTrue();
 	}
 
 	@Test
