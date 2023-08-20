@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -12,6 +14,7 @@ class LinkedListTest {
 
 	private LinkedList<Integer> emptyLinkedList;
 	private LinkedList<Integer> linkedListWithNumbers;
+	// 12 items
 	private int[] testNumbers = {10, -5, 0, 19, 21, -24, 222, -194, -1, 120, 9230, 102};
 
 	@BeforeEach
@@ -39,6 +42,12 @@ class LinkedListTest {
 		assertThat(emptyLinkedList.size()).isEqualTo(testNumbers.length);
 		assertThat(emptyLinkedList.toList())
 				.containsExactlyElementsOf(expected);
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {5, 7, 11, 0, 2, 3, 4, 1, 8, 6, 9, 10})
+	void getIndexTest(int index) {
+		assertThat(linkedListWithNumbers.get(index)).isEqualTo(testNumbers[index]);
 	}
 
 	@Test
