@@ -1,4 +1,5 @@
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Deque;
@@ -304,9 +305,42 @@ class LinkedListTest {
 	}
 
 	@Test
+	void givenEqualLists_whenComparing_thenReturnTrueTest() {
+		LinkedList<Integer> compare = new LinkedList<>();
+		assertThat(emptyLinkedList).isEqualTo(compare);
+
+		compare = new LinkedList<>();
+		for (int num : testNumbers) compare.add(num);
+		assertThat(linkedListWithNumbers).isEqualTo(compare);
+	}
+
+	@Test
+	void equalsWhenListsHaveSameElementsInDifferentOrderTest() {
+		List<Integer> nums = Arrays.stream(testNumbers)
+				.boxed()
+				.collect(Collectors.toList());
+		Collections.shuffle(nums); // may return same list but probability is close to 0
+		for(int num: nums) emptyLinkedList.add(num);
+		assertThat(linkedListWithNumbers).isNotEqualTo(emptyLinkedList);
+	}
+
+	@Test
+	void equalsWhenListEmptyButDifferentTypeTest() {
+		LinkedList<Double> compare = new LinkedList<>();
+		assertThat(emptyLinkedList).isEqualTo(compare);
+	}
+
+	@Test
 	void toListTest() {
 		assertThat(linkedListWithNumbers.toList())
 				.containsExactlyElementsOf(convertIntArrayToList(testNumbers));
+	}
+
+	@Test
+	void toStringTest() {
+		assertThat(emptyLinkedList.toString()).isEqualTo("[]");
+		assertThat(linkedListWithNumbers.toString())
+				.isEqualTo("[10, -5, 0, 19, 21, -24, 222, -194, -1, 120, 9230, 102]");
 	}
 
 	private List<Integer> convertIntArrayToList(int[] intArray) {
