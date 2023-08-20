@@ -1,5 +1,4 @@
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Deque;
@@ -10,14 +9,14 @@ import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import utils.TestUtils;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 class LinkedListTest {
 
@@ -200,6 +199,38 @@ class LinkedListTest {
 		assertThat(linkedListWithNumbers.containsAll(list)).isTrue();
 		assertThat(linkedListWithNumbers.containsAll(deque)).isTrue();
 		assertThat(linkedListWithNumbers.containsAll(set)).isTrue();
+	}
+
+	@Test
+	void removeLastTest() {
+		for (int i = 0; i < 12; i++) {
+			int toRemove = linkedListWithNumbers.getLast();
+			assertThat(linkedListWithNumbers.removeLast())
+					.isEqualTo(toRemove);
+		}
+		assertThat(linkedListWithNumbers.size()).isEqualTo(0);
+	}
+
+	@Test
+	void removeLastWhenListEmptyTest() {
+		assertThatExceptionOfType(IllegalStateException.class)
+				.isThrownBy(() -> emptyLinkedList.removeLast());
+	}
+
+	@Test
+	void removeFirstTest() {
+		for (int i = 0; i < 12; i++) {
+			int toRemove = linkedListWithNumbers.getFirst();
+			assertThat(linkedListWithNumbers.removeFirst())
+					.isEqualTo(toRemove);
+		}
+		assertThat(linkedListWithNumbers.size()).isEqualTo(0);
+	}
+
+	@Test
+	void removeFirstWhenListEmptyTest() {
+		assertThatExceptionOfType(IllegalStateException.class)
+				.isThrownBy(() -> emptyLinkedList.removeFirst());
 	}
 
 	@Test
