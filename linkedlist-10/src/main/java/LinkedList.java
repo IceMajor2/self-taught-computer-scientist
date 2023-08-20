@@ -54,16 +54,16 @@ public class LinkedList<T> implements MyCollection<T>, Iterable<T> {
 
 	@Override
 	public boolean contains(Object object) {
-		for(T element : this) {
-			if(Objects.equals(element, object)) return true;
+		for (T element : this) {
+			if (Objects.equals(element, object)) return true;
 		}
 		return false;
 	}
 
 	@Override
 	public boolean containsAll(Collection<?> collection) {
-		for(var object : collection) {
-			if(!this.contains(object)) return false;
+		for (var object : collection) {
+			if (!this.contains(object)) return false;
 		}
 		return true;
 	}
@@ -90,13 +90,13 @@ public class LinkedList<T> implements MyCollection<T>, Iterable<T> {
 		size--;
 		return toReturn;
 	}
-	
+
 	@Override
 	public boolean remove(Object object) {
 		throwExceptionIfListEmpty();
 		Node<T> current = sentinel.next;
-		for(T element : this) {
-			if(Objects.equals(element, object)) {
+		for (T element : this) {
+			if (Objects.equals(element, object)) {
 				this.remove(current);
 				return true;
 			}
@@ -127,7 +127,7 @@ public class LinkedList<T> implements MyCollection<T>, Iterable<T> {
 
 	@Override
 	public void clear() {
-		while(size != 0) {
+		while (size != 0) {
 			removeFirst();
 		}
 	}
@@ -135,7 +135,7 @@ public class LinkedList<T> implements MyCollection<T>, Iterable<T> {
 	@Override
 	public List<T> toList() {
 		List<T> javaList = new ArrayList<>();
-		for(T element : this) javaList.add(element);
+		for (T element : this) javaList.add(element);
 		return javaList;
 	}
 
@@ -154,8 +154,12 @@ public class LinkedList<T> implements MyCollection<T>, Iterable<T> {
 			if (this.size != otherCollection.size()) {
 				return false;
 			}
-			for (T x : this) {
-				if (!otherCollection.contains(x)) {
+			for (int i = 0; i < size; i++) {
+				T thisElement = get(i);
+				try {
+					T otherElement = (T) otherCollection.get(i);
+					if(!thisElement.equals(otherElement)) return false;
+				} catch (ClassCastException e) {
 					return false;
 				}
 			}
@@ -179,7 +183,7 @@ public class LinkedList<T> implements MyCollection<T>, Iterable<T> {
 	}
 
 	private void throwExceptionIfIndexOutOfBounds(int index) {
-		if(index < 0 || index >= size) throw new ArrayIndexOutOfBoundsException();
+		if (index < 0 || index >= size) throw new ArrayIndexOutOfBoundsException();
 	}
 
 	private class Node<T> {
