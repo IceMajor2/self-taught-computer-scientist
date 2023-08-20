@@ -90,17 +90,7 @@ public class LinkedList<T> implements MyCollection<T>, Iterable<T> {
 		size--;
 		return toReturn;
 	}
-
-	private T remove(Node<T> current) {
-		T toReturn = current.data;
-		Node<T> previous = current.prev;
-		Node<T> next = current.next;
-		previous.next = next;
-		next.prev = previous;
-		size--;
-		return toReturn;
-	}
-
+	
 	@Override
 	public boolean remove(Object object) {
 		throwExceptionIfListEmpty();
@@ -113,6 +103,16 @@ public class LinkedList<T> implements MyCollection<T>, Iterable<T> {
 			current = current.next;
 		}
 		return false;
+	}
+
+	private T remove(Node<T> current) {
+		T toReturn = current.data;
+		Node<T> previous = current.prev;
+		Node<T> next = current.next;
+		previous.next = next;
+		next.prev = previous;
+		size--;
+		return toReturn;
 	}
 
 	@Override
