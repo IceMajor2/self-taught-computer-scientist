@@ -295,6 +295,15 @@ class LinkedListTest {
 	}
 
 	@Test
+	void clearTest() {
+		emptyLinkedList.clear();
+		assertThat(emptyLinkedList.toList()).isEqualTo(new LinkedList<Integer>().toList());
+
+		linkedListWithNumbers.clear();
+		assertThat(linkedListWithNumbers.toList()).isEqualTo(emptyLinkedList.toList());
+	}
+
+	@Test
 	void toListTest() {
 		assertThat(linkedListWithNumbers.toList())
 				.containsExactlyElementsOf(convertIntArrayToList(testNumbers));
