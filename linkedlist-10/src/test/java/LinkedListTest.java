@@ -275,6 +275,26 @@ class LinkedListTest {
 	}
 
 	@Test
+	void isEmptyTest() {
+		assertThat(emptyLinkedList.isEmpty()).isTrue();
+
+		emptyLinkedList.addFirst(9);
+
+		assertThat(emptyLinkedList.isEmpty()).isFalse();
+
+		emptyLinkedList.add(10);
+		emptyLinkedList.add(10);
+		emptyLinkedList.remove(10);
+
+		assertThat(emptyLinkedList.isEmpty()).isFalse();
+
+		emptyLinkedList.removeLast();
+		emptyLinkedList.removeFirst();
+
+		assertThat(emptyLinkedList.isEmpty()).isTrue();
+	}
+
+	@Test
 	void toListTest() {
 		assertThat(linkedListWithNumbers.toList())
 				.containsExactlyElementsOf(convertIntArrayToList(testNumbers));
