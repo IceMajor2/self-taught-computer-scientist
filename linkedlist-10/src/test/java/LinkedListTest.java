@@ -233,6 +233,24 @@ class LinkedListTest {
 				.isThrownBy(() -> emptyLinkedList.removeFirst());
 	}
 
+	@ParameterizedTest
+	@ValueSource(ints = { 10, -5, 0, 19, 21, -24, 222, -194, -1, 120, 9230, 102 })
+	void removeObjectTest(int element) {
+		assertThat(linkedListWithNumbers.remove(element)).isTrue();
+	}
+
+	@Test
+	void removeObjectWhenListEmptyTest() {
+		assertThatExceptionOfType(IllegalStateException.class)
+				.isThrownBy(() -> emptyLinkedList.remove(0));
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = {-654239, 912, 5892, 1824, -523})
+	void removeObjectWhenListDoesNotContainItTest(int element) {
+		assertThat(linkedListWithNumbers.remove(element)).isFalse();
+	}
+
 	@Test
 	void toListTest() {
 		assertThat(linkedListWithNumbers.toList())
