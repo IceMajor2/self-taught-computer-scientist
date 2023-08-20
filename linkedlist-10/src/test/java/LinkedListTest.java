@@ -86,6 +86,22 @@ class LinkedListTest {
 	}
 
 	@Test
+	void getLastTest() {
+		emptyLinkedList.add(-5);
+		emptyLinkedList.add(213);
+
+		assertThat(emptyLinkedList.getLast()).isEqualTo(213);
+
+		emptyLinkedList.removeFirst();
+
+		assertThat(emptyLinkedList.getLast()).isEqualTo(213);
+
+		emptyLinkedList.add(30);
+
+		assertThat(emptyLinkedList.getLast()).isEqualTo(30);
+	}
+
+	@Test
 	void getLastWhenListEmptyTest() {
 		assertThatExceptionOfType(ArrayIndexOutOfBoundsException.class)
 				.isThrownBy(() -> emptyLinkedList.getLast());
