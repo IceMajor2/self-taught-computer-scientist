@@ -127,7 +127,9 @@ public class LinkedList<T> implements MyCollection<T>, Iterable<T> {
 
 	@Override
 	public void clear() {
-		// TODO
+		while(size != 0) {
+			removeFirst();
+		}
 	}
 
 	@Override
@@ -148,12 +150,12 @@ public class LinkedList<T> implements MyCollection<T>, Iterable<T> {
 			return true;
 		}
 
-		if (other instanceof LinkedList oLLD) {
-			if (this.size != oLLD.size) {
+		if (other instanceof MyCollection otherCollection) {
+			if (this.size != otherCollection.size()) {
 				return false;
 			}
 			for (T x : this) {
-				if (!oLLD.contains(x)) {
+				if (!otherCollection.contains(x)) {
 					return false;
 				}
 			}
