@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -64,6 +65,30 @@ class LinkedListTest {
 	void getIndexWhenListEmptyTest(int index) {
 		assertThatExceptionOfType(ArrayIndexOutOfBoundsException.class)
 				.isThrownBy(() -> emptyLinkedList.get(index));
+	}
+
+	@Test
+	void getFirstTest() {
+		emptyLinkedList.add(5);
+		emptyLinkedList.add(10);
+
+		assertThat(emptyLinkedList.getFirst()).isEqualTo(5);
+
+		emptyLinkedList.removeFirst();
+
+		assertThat(emptyLinkedList.getFirst()).isEqualTo(10);
+	}
+
+	@Test
+	void getFirstWhenListEmptyTest() {
+		assertThatExceptionOfType(ArrayIndexOutOfBoundsException.class)
+				.isThrownBy(() -> emptyLinkedList.getFirst());
+	}
+
+	@Test
+	void getLastWhenListEmptyTest() {
+		assertThatExceptionOfType(ArrayIndexOutOfBoundsException.class)
+				.isThrownBy(() -> emptyLinkedList.getLast());
 	}
 
 	@Test
