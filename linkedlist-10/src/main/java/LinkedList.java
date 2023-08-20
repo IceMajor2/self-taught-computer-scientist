@@ -32,7 +32,7 @@ public class LinkedList<T> implements MyCollection<T>, Iterable<T> {
 
 	@Override
 	public T get(int index) {
-		if (index < 0 || index >= size) throw new IllegalArgumentException();
+		throwExceptionIfIndexOutOfBounds(index);
 		Node<T> current = sentinel.next;
 		int i = 0;
 		while (i != index) {
@@ -43,12 +43,12 @@ public class LinkedList<T> implements MyCollection<T>, Iterable<T> {
 	}
 
 	public T getFirst() {
-		throwExceptionIfListEmpty();
+		throwExceptionIfIndexOutOfBounds(0);
 		return sentinel.next.data;
 	}
 
 	public T getLast() {
-		throwExceptionIfListEmpty();
+		throwExceptionIfIndexOutOfBounds(size - 1);
 		return sentinel.prev.data;
 	}
 
@@ -174,6 +174,10 @@ public class LinkedList<T> implements MyCollection<T>, Iterable<T> {
 
 	private void throwExceptionIfListEmpty() {
 		if (size == 0) throw new IllegalStateException("List is empty");
+	}
+
+	private void throwExceptionIfIndexOutOfBounds(int index) {
+		if(index < 0 || index >= size) throw new ArrayIndexOutOfBoundsException();
 	}
 
 	private class Node<T> {
