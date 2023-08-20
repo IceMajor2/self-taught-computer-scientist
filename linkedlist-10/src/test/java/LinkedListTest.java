@@ -252,6 +252,29 @@ class LinkedListTest {
 	}
 
 	@Test
+	void sizeTest() {
+		assertThat(emptyLinkedList.size()).isEqualTo(0);
+
+		emptyLinkedList.add(20);
+
+		assertThat(emptyLinkedList.size()).isEqualTo(1);
+
+		emptyLinkedList.addFirst(20);
+		emptyLinkedList.add(90);
+
+		assertThat(emptyLinkedList.size()).isEqualTo(3);
+
+		emptyLinkedList.remove(20);
+
+		assertThat(emptyLinkedList.size()).isEqualTo(2);
+
+		emptyLinkedList.removeLast();
+		emptyLinkedList.removeFirst();
+
+		assertThat(emptyLinkedList.size()).isEqualTo(0);
+	}
+
+	@Test
 	void toListTest() {
 		assertThat(linkedListWithNumbers.toList())
 				.containsExactlyElementsOf(convertIntArrayToList(testNumbers));
