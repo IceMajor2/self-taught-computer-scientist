@@ -61,7 +61,7 @@ class LinkedListTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { -1, 0, 1, 2, 3, 4, 491, -510})
+	@ValueSource(ints = { -1, 0, 1, 2, 3, 4, 491, -510 })
 	void getIndexWhenListEmptyTest(int index) {
 		assertThatExceptionOfType(ArrayIndexOutOfBoundsException.class)
 				.isThrownBy(() -> emptyLinkedList.get(index));
@@ -105,6 +105,32 @@ class LinkedListTest {
 	void getLastWhenListEmptyTest() {
 		assertThatExceptionOfType(ArrayIndexOutOfBoundsException.class)
 				.isThrownBy(() -> emptyLinkedList.getLast());
+	}
+
+	@Test
+	void containsWhenListEmptyTest() {
+		assertThat(emptyLinkedList.contains(30)).isFalse();
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = { 10, -5, 0, 19, 21, -24, 222, -194, -1, 120, 9230, 102 })
+	void containsWhenListHasElementTest(int element) {
+		assertThat(linkedListWithNumbers.contains(element)).isTrue();
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints = { -195, 9342, -1895, 239, 193, 43, 55, 11 })
+	void containsWhenListDoesNotHaveElementTest(int element) {
+		assertThat(linkedListWithNumbers.contains(element)).isFalse();
+	}
+
+	@Test
+	void containsWhenObjectIsOfDifferentTypeTest() {
+		assertThat(linkedListWithNumbers.contains(0.0)).isFalse();
+		assertThat(linkedListWithNumbers.contains("10")).isFalse();
+		assertThat(linkedListWithNumbers.contains(-5l)).isFalse();
+		assertThat(linkedListWithNumbers.contains(120f)).isFalse();
+		assertThat(linkedListWithNumbers.contains(-1.1)).isFalse();
 	}
 
 	@Test
