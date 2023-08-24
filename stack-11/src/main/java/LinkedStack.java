@@ -1,68 +1,63 @@
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 import interfaces.MyCollection;
+import linkedlist.LinkedList;
 
 public class LinkedStack<T> implements MyCollection<T> {
 
 	private LinkedList<T> linkedList;
 
 	public void push(T object) {
-
+		this.linkedList.add(object);
 	}
 
 	public T pop() {
-		return null;
+		return this.linkedList.removeLast();
 	}
 
 	@Override
 	public void add(T object) {
-
+		push(object);
 	}
 
 	@Override
 	public T get() {
-		return null;
+		return linkedList.getLast();
 	}
 
 	@Override
 	public boolean contains(Object object) {
-		return false;
+		return linkedList.contains(object);
 	}
 
 	@Override
 	public boolean containsAll(Collection<?> collection) {
-		return false;
+		return linkedList.containsAll(collection);
 	}
 
 	@Override
 	public T remove() {
-		return null;
-	}
-
-	@Override
-	public boolean remove(Object o) {
-		return false;
+		return pop();
 	}
 
 	@Override
 	public int size() {
-		return 0;
+		return linkedList.size();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return false;
+		return linkedList.isEmpty();
 	}
 
 	@Override
 	public void clear() {
-
+		linkedList.clear();
 	}
 
 	@Override
 	public List<T> toList() {
-		return null;
+		return linkedList.toList();
 	}
 }
