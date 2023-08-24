@@ -42,34 +42,17 @@ public class TestUtils {
 
 	/**
 	 * Method will parse an array given in
-	 * {@link #org.junit.jupiter.params.provider.CsvSource} into an {@code Integer}
+	 * {@link #org.junit.jupiter.params.provider.CsvSource} into a provided class
 	 * array.
 	 * <p>
-	 * Example:
-	 * -@CsvSource("[3;9;8;2;0]") will be parsed into an int array.
-	 * {@code {3, 9, 8, 2, 0}}.
+	 * Example of "CSV array writing":
+	 * <br>{@code @CsvSource("[3;9;8;2;0]")} <-- CORRECT
+	 * <br>{@code @CsvSource("[3,9,8,2,0]")} <-- WRONG
+	 * <br>{@code @CsvSource("[3, 9, 8, 2, 0]")} <-- WRONG
+	 * <br>{@code @CsvSource("{3;9;8;2;0}")} <-- WRONG
 	 * <p>
-	 * <b>Note</b> the ';' as delimiter inside the array. It's required.
+	 * Notice the <b>';'</b> as delimiter inside the array.
 	 */
-	@Deprecated
-	public static Integer[] parseCsvSourceToIntegerArray(String csvSource) {
-		csvSource = csvSource.replace("[", "").replace("]", "");
-		String[] strNums = csvSource.split(";");
-		Integer[] intArray = new Integer[strNums.length];
-		int index = 0;
-		for (String strNum : strNums) {
-			intArray[index] = Integer.valueOf(strNum);
-			index++;
-		}
-		return intArray;
-	}
-
-	@Deprecated
-	public static int[] parseCsvSourceToIntArray(String csvSource) {
-		Integer[] integers = parseCsvSourceToIntegerArray(csvSource);
-		return Arrays.stream(integers).mapToInt(i -> i).toArray();
-	}
-
 	public static <T> T[] parseCsvSourceToArray(String csvSource, Class<T> arrClass) {
 		csvSource = csvSource.replace("[", "").replace("]", "");
 		String[] numStrs = csvSource.split(";");
