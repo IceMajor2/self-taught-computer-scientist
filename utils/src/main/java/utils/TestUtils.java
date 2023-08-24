@@ -1,7 +1,10 @@
 package utils;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Random;
+
+import org.joda.convert.StringConvert;
 
 public class TestUtils {
 
@@ -48,6 +51,7 @@ public class TestUtils {
 	 * <p>
 	 * <b>Note</b> the ';' as delimiter inside the array. It's required.
 	 */
+	@Deprecated
 	public static Integer[] parseCsvSourceToIntegerArray(String csvSource) {
 		csvSource = csvSource.replace("[", "").replace("]", "");
 		String[] strNums = csvSource.split(";");
@@ -60,8 +64,22 @@ public class TestUtils {
 		return intArray;
 	}
 
+	@Deprecated
 	public static int[] parseCsvSourceToIntArray(String csvSource) {
 		Integer[] integers = parseCsvSourceToIntegerArray(csvSource);
 		return Arrays.stream(integers).mapToInt(i -> i).toArray();
+	}
+
+	public static <T> T[] parseCsvSourceToArray(String csvSource, Class<T> arrClass) {
+		csvSource = csvSource.replace("[", "").replace("]", "");
+		String[] numStrs = csvSource.split(";");
+		T[] array = (T[]) Array.newInstance(arrClass, numStrs.length);
+
+		int index = 0;
+		for(String numStr : numStrs) {
+			array[index] = StringConvert.INSTANCE.convertFromString(arrClass, numStr);
+			index++;
+		}
+		return array;
 	}
 }
