@@ -7,7 +7,7 @@ public interface MyCollection<T> {
 
 	void add(T object);
 
-	T get(int index);
+	T get();
 
 	boolean contains(Object object);
 
