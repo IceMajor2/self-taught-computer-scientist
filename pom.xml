@@ -16,6 +16,7 @@
 		<module>array-challenge-09</module>
 		<module>utils</module>
 		<module>linkedlist-10</module>
+		<module>stack-11</module>
 	</modules>
 
 	<properties>
