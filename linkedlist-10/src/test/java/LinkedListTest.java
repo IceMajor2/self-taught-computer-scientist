@@ -153,7 +153,7 @@ class LinkedListTest {
 			"[201;21;-24;101;94]"
 	})
 	void containsAllWhenOnlyPartOfElementsAreFoundTest(String s) {
-		Integer[] array = TestUtils.parseCsvSourceToIntegerArray(s);
+		Integer[] array = TestUtils.parseCsvSourceToArray(s, Integer.class);
 		List<Integer> list = Arrays.asList(array);
 		Deque<Integer> deque = new ArrayDeque(list);
 		Set<Integer> set = new HashSet(list);
@@ -170,7 +170,7 @@ class LinkedListTest {
 			"[19;21;222]"
 	})
 	void containsAllWhenElementsInListButDoubleTypeTest(String s) {
-		Integer[] array = TestUtils.parseCsvSourceToIntegerArray(s);
+		Integer[] array = TestUtils.parseCsvSourceToArray(s, Integer.class);
 		List<Double> list = Arrays.stream(array)
 				.flatMapToDouble(DoubleStream::of)
 				.boxed()
@@ -192,7 +192,7 @@ class LinkedListTest {
 			"[19;-24;-1;10;222;21;102;9230;120;-194;0;-5]"
 	})
 	void containsAllWhenElementsInListTest(String s) {
-		Integer[] array = TestUtils.parseCsvSourceToIntegerArray(s);
+		Integer[] array = TestUtils.parseCsvSourceToArray(s, Integer.class);
 		List<Integer> list = Arrays.asList(array);
 		Deque<Integer> deque = new ArrayDeque(list);
 		Set<Integer> set = new HashSet(list);
