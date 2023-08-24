@@ -6,7 +6,7 @@ import linkedlist.LinkedList;
 
 public class LinkedStack<T> implements MyCollection<T> {
 
-	private LinkedList<T> linkedList;
+	private LinkedList<T> linkedList = new LinkedList<>();
 
 	public void push(T object) {
 		this.linkedList.add(object);
