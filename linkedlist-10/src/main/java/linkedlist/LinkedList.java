@@ -1,3 +1,5 @@
+package linkedlist;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -97,7 +99,6 @@ public class LinkedList<T> implements MyCollection<T>, Iterable<T> {
 		return toReturn;
 	}
 
-	@Override
 	public boolean remove(Object object) {
 		throwExceptionIfListEmpty();
 		Node<T> current = sentinel.next;
