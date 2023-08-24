@@ -32,7 +32,6 @@ public class LinkedList<T> implements MyCollection<T>, Iterable<T> {
 		sentinel.next.next.prev = sentinel.next;
 	}
 
-	@Override
 	public T get(int index) {
 		throwExceptionIfIndexOutOfBounds(index);
 		Node<T> current = sentinel.next;
@@ -44,9 +43,14 @@ public class LinkedList<T> implements MyCollection<T>, Iterable<T> {
 		return current.data;
 	}
 
-	public T getFirst() {
+	@Override
+	public T get() {
 		throwExceptionIfIndexOutOfBounds(0);
 		return sentinel.next.data;
+	}
+
+	public T getFirst() {
+		return get();
 	}
 
 	public T getLast() {
@@ -156,16 +160,8 @@ public class LinkedList<T> implements MyCollection<T>, Iterable<T> {
 			if (this.size != otherCollection.size()) {
 				return false;
 			}
-			for (int i = 0; i < size; i++) {
-				T thisElement = get(i);
-				try {
-					T otherElement = (T) otherCollection.get(i);
-					if(!thisElement.equals(otherElement)) return false;
-				} catch (ClassCastException e) {
-					return false;
-				}
-			}
-			return true;
+			List javaList = otherCollection.toList();
+			return javaList.equals(this.toList());
 		}
 		return false;
 	}
