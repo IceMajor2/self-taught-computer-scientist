@@ -108,7 +108,7 @@ class LinkedStackTest {
 	}
 
 	@Test
-	void containsAllWhenElementsInListButIntegerTypeTest(String s) {
+	void containsAllWhenElementsInListButIntegerTypeTest() {
 		Integer[] nums = {-5,2,0};
 		List<Integer> list = List.of(nums);
 		Set<Integer> set = new HashSet<>(list);
@@ -227,7 +227,7 @@ class LinkedStackTest {
 	void toStringTest() {
 		assertThat(emptyLinkedStack.toString()).isEqualTo("[]");
 		assertThat(linkedStackWithNumbers.toString())
-				.isEqualTo("[10, -5, 0, 19, 21, -24, 222, -194, -1, 120, 9230, 102]");
+				.isEqualTo("[-5.0, 0.0, 291.21, 2.201859430328, 3.14, 93.12, 2.0, -6.1023]");
 	}
 
 	private List<Double> convertDoubleArrayToList(double[] doubleArray) {
