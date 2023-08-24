@@ -15,8 +15,6 @@ public interface MyCollection<T> {
 
 	T remove();
 
-	boolean remove(Object o);
-
 	int size();
 
 	boolean isEmpty();
