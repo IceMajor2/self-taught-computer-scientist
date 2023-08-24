@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
+import interfaces.MyCollection;
+
 public class LinkedList<T> implements MyCollection<T>, Iterable<T> {
 
 	private Node<T> sentinel;
