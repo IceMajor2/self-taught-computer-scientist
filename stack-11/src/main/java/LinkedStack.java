@@ -60,4 +60,14 @@ public class LinkedStack<T> implements MyCollection<T> {
 	public List<T> toList() {
 		return linkedList.toList();
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return linkedList.equals(obj);
+	}
+
+	@Override
+	public String toString() {
+		return linkedList.toString();
+	}
 }
