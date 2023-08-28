@@ -70,4 +70,8 @@ public class LinkedStack<T> implements MyCollection<T> {
 	public String toString() {
 		return linkedList.toString();
 	}
+
+	public T max() {
+		return null;
+	}
 }
