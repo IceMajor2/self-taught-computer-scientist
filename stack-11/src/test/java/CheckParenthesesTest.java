@@ -12,7 +12,7 @@ class CheckParenthesesTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"())(", "}{}{", "( ( )))", "){))", "{}{ { ){))"})
+    @ValueSource(strings = {"())(", "}{}{", "( ( )))", "){))", "{}{ { ){)) {"})
     void checkParenthesesWrongTest(String parentheses) {
         assertThat(CheckParentheses.parenthesesBalance(parentheses)).isFalse();
     }
