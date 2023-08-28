@@ -1,19 +1,12 @@
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Deque;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.DoubleStream;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import utils.TestUtils;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -241,6 +234,38 @@ class LinkedStackTest {
         linkedStackWithNumbers.push(-1.9);
 
         assertThat(linkedStackWithNumbers.max()).isEqualTo(1);
+    }
+
+    @Test
+    void minValueTest() {
+        assertThat(linkedStackWithNumbers.min()).isEqualTo(-6.1023);
+
+        linkedStackWithNumbers.pop();
+
+        assertThat(linkedStackWithNumbers.min()).isEqualTo(-5);
+
+        linkedStackWithNumbers.pop();
+        linkedStackWithNumbers.pop();
+
+        assertThat(linkedStackWithNumbers.min()).isEqualTo(-5);
+
+        linkedStackWithNumbers.pop();
+        linkedStackWithNumbers.pop();
+        linkedStackWithNumbers.pop();
+
+        assertThat(linkedStackWithNumbers.min()).isEqualTo(-5);
+
+        linkedStackWithNumbers.push(1d);
+
+        assertThat(linkedStackWithNumbers.min()).isEqualTo(-5);
+
+        linkedStackWithNumbers.push(-9.935129);
+
+        assertThat(linkedStackWithNumbers.min()).isEqualTo(-9.935129);
+
+        linkedStackWithNumbers.push(-9.93513);
+
+        assertThat(linkedStackWithNumbers.min()).isEqualTo(-9.93513);
     }
 
     @Test
