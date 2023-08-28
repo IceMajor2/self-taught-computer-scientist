@@ -43,9 +43,21 @@ public class LinkedStack<T> implements MyCollection<T> {
     }
 
     public T pop() {
-        this.maxStack.removeLast();
-        this.minStack.removeLast();
+        popMax();
+        popMin();
         return this.linkedList.removeLast();
+    }
+
+    private void popMin() {
+        if(minStack.size() != 0) {
+            this.minStack.removeLast();
+        }
+    }
+
+    private void popMax() {
+        if(maxStack.size() != 0) {
+            this.maxStack.removeLast();
+        }
     }
 
     @Override
