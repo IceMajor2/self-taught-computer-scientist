@@ -1,5 +1,6 @@
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,6 +16,13 @@ class DuplicateRemovalTest {
     }, delimiter = '|')
     void shouldReturnDuplicateWordsFromString(String str, String expected) {
         assertThat(DuplicateRemoval.removeDuplicates(str)).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"This string does not have a single duplicate.", "movie cinema popcorn action",
+            "Weather forecast for tonight: dark.", "When you step on the brakes ur life is in your foot's hands"})
+    void shouldNotChangeAnythingIfStringDoesNotContainDuplicates(String str) {
+        assertThat(DuplicateRemoval.removeDuplicates(str)).isEqualTo(str);
     }
 
 }
