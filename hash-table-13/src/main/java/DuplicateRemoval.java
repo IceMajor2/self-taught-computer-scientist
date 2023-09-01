@@ -39,10 +39,6 @@ public class DuplicateRemoval {
         return string;
     }
 
-    private static void appendWhitespaces(String original, StringBuilder builder, int currentIndex) {
-
-    }
-
     private static String removeWhitespacesAtEnd(String str) {
         StringBuilder sb = new StringBuilder(str);
         int finalIndex = -1;
