@@ -25,4 +25,13 @@ class DuplicateRemovalTest {
         assertThat(DuplicateRemoval.removeDuplicates(str)).isEqualTo(str);
     }
 
+    @ParameterizedTest
+    @CsvSource(value = {
+            "Fighting for  peace is like   screwing    for virginity | Fighting for  peace is like   screwing    virginity",
+            "That's     why they call  it the   American Dream  , because you    have to be  asleep to believe       it. | " +
+                    "That's     why they call  it the   American Dream  , because you    have to be  asleep believe"
+    }, delimiter = '|')
+    void shouldPersistSentenceFormOnInconsistentSpacing(String str, String expected) {
+        assertThat(DuplicateRemoval.removeDuplicates(str)).isEqualTo(expected);
+    }
 }
