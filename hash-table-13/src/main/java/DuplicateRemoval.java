@@ -40,8 +40,8 @@ public class DuplicateRemoval {
         if (excludedChars.contains(word.charAt(0))) {
             sb.deleteCharAt(0);
         }
-        int lastIndex = word.length() - 1;
-        if (excludedChars.contains(word.charAt(lastIndex))) {
+        int lastIndex = sb.length() - 1;
+        if (lastIndex >= 0 && excludedChars.contains(word.charAt(lastIndex))) {
             sb.deleteCharAt(lastIndex);
         }
         return sb.toString();
