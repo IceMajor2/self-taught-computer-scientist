@@ -17,7 +17,8 @@
 		<module>utils</module>
 		<module>linkedlist-10</module>
 		<module>stack-11</module>
-	</modules>
+        <module>hash-table-13</module>
+    </modules>
 
 	<properties>
 		<maven.compiler.source>17</maven.compiler.source>
