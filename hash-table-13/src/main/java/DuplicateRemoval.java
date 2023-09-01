@@ -13,20 +13,46 @@ public class DuplicateRemoval {
      * a {@code String} where each word is appearing at most once.
      */
     public static String removeDuplicates(String str) {
-        Map<String, Integer> wordCount = new HashMap<>();
+        Map<String, Boolean> words = new HashMap<>();
         Scanner scanner = new Scanner(str);
+        StringBuilder builder = new StringBuilder("");
 
-        StringBuilder noDuplicates = new StringBuilder("");
+        int index = 0;
         while (scanner.hasNext()) {
             String next = scanner.next();
             String pureWord = getPureWord(next);
-            if (wordCount.containsKey(pureWord)) {
+            if (words.containsKey(pureWord)) {
+                index += next.length() + 1; // the + 1 is for accounting a space
                 continue;
             }
-            wordCount.put(pureWord, 1);
-            noDuplicates.append(next + " ");
+            words.put(pureWord, true);
+            builder.append(next);
+            index += next.length();
+            while (index < str.length()) {
+                char whitespace = str.charAt(index);
+                if (!Character.isWhitespace(whitespace)) break;
+                builder.append(whitespace);
+                index++;
+            }
         }
-        return noDuplicates.deleteCharAt(noDuplicates.length() - 1).toString();
+        String string = removeWhitespacesAtEnd(builder.toString());
+        return string;
+    }
+
+    private static void appendWhitespaces(String original, StringBuilder builder, int currentIndex) {
+
+    }
+
+    private static String removeWhitespacesAtEnd(String str) {
+        StringBuilder sb = new StringBuilder(str);
+        int finalIndex = -1;
+        for (int i = sb.length() - 1; ; i--) {
+            char ch = sb.charAt(i);
+            if (!Character.isWhitespace(ch)) break;
+            finalIndex = finalIndex == -1 ? i : finalIndex - 1;
+        }
+        if (finalIndex != -1) sb.delete(finalIndex, sb.length());
+        return sb.toString();
     }
 
     /**
