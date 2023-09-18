@@ -18,6 +18,7 @@
 		<module>linkedlist-10</module>
 		<module>stack-11</module>
         <module>hash-table-13</module>
+        <module>binary-tree-14</module>
     </modules>
 
 	<properties>
