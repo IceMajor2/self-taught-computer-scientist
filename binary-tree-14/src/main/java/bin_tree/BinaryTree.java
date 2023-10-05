@@ -35,7 +35,7 @@ public class BinaryTree {
 
     public static class TreeNode {
 
-        int value;
+        public int value;
         public TreeNode left;
         public TreeNode right;
 
