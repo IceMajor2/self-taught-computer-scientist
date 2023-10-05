@@ -19,6 +19,7 @@
 		<module>stack-11</module>
         <module>hash-table-13</module>
         <module>binary-tree-14</module>
+        <module>binary-heap-15</module>
     </modules>
 
 	<properties>
