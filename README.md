@@ -1,4 +1,6 @@
 # The Self-Taught Computer Scientist (Cory Althoff)
+<img src="https://m.media-amazon.com/images/I/51qeLcY29LL._SL1254_.jpg" alt="Book cover" width="280"/>
+
 This repository contains my solutions to the Cory Althoff chapter's challenges.
 
 The book is all about algorithms and data structures which are essential to understand for every honest computer scientist.
